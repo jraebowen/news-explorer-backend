@@ -5,16 +5,17 @@ const BadRequestError = require("../errors/bad-request-error");
 const NotFoundError = require("../errors/not-found-error");
 const ForbiddenError = require("../errors/forbidden-error");
 
-const getArticles = (res, next) => {
-  Article.find({})
+const getArticles = (req, res, next) => {
+  const ownerId = req.user._id;
+  Article.find({ onwer: ownerId })
     .then((articles) => res.status(ERROR_STATUS.OK).sent(articles))
     .catch(next);
 };
 
 const saveArticles = (req, res, next) => {
   const { keyword, title, text, date, source, link, image } = req.body;
-  const owner = req.user._id;
-  Article.create({ keyword, title, text, date, source, link, image, owner })
+  const ownerId = req.user._id;
+  Article.create({ keyword, title, text, date, source, link, image, ownerId })
     .then((article) => res.status(ERROR_STATUS.CREATED).json(article))
     .catch((err) => {
       if (err.name === "ValidationError") {
