@@ -1,13 +1,21 @@
+require("dotenv").config();
+
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const { errors } = require("celebrate");
-require("dotenv").config();
 
 const app = express();
-const { PORT = 3002 } = process.env;
+const { PORT, MONGO_URL } = process.env;
+if (!PORT) {
+  throw new Error("PORT is not defined in .env");
+}
 
-mongoose.connect("mongodb://127.0.0.1:27017/newsexplorer_db");
+if (!MONGO_URL) {
+  throw new Error("MONGO_URL is not defined in .env");
+}
+
+mongoose.connect(MONGO_URL);
 
 const mainRouter = require("./routes/index.js");
 const errorHandler = require("./middlewares/error-handler");
