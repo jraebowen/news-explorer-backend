@@ -7,15 +7,24 @@ const ForbiddenError = require("../errors/forbidden-error");
 
 const getArticles = (req, res, next) => {
   const ownerId = req.user._id;
-  Article.find({ onwer: ownerId })
-    .then((articles) => res.status(ERROR_STATUS.OK).sent(articles))
+  Article.find({ owner: ownerId })
+    .then((articles) => res.status(ERROR_STATUS.OK).send(articles))
     .catch(next);
 };
 
 const saveArticles = (req, res, next) => {
   const { keyword, title, text, date, source, link, image } = req.body;
   const ownerId = req.user._id;
-  Article.create({ keyword, title, text, date, source, link, image, ownerId })
+  Article.create({
+    keyword,
+    title,
+    text,
+    date,
+    source,
+    link,
+    image,
+    owner: ownerId,
+  })
     .then((article) => res.status(ERROR_STATUS.CREATED).json(article))
     .catch((err) => {
       if (err.name === "ValidationError") {
