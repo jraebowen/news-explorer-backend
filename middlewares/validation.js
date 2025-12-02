@@ -1,5 +1,4 @@
 const { celebrate, Joi } = require("celebrate");
-const validator = require("validator");
 
 module.exports.validateLogin = celebrate({
   body: Joi.object().keys({
