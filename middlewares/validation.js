@@ -54,9 +54,9 @@ module.exports.validateArticleSave = celebrate({
     source: Joi.string().required().messages({
       "string.empty": 'The "source" field must be filled in',
     }),
-    link: Joi.string().uri().required().messages({
-      "string.empty": 'The "link" field must be filled in',
-      "string.uri": 'The "link" field must be a valid URL',
+    url: Joi.string().uri().required().messages({
+      "string.empty": 'The "url" field must be filled in',
+      "string.uri": 'The "url" field must be a valid URL',
     }),
     image: Joi.string().uri().required().messages({
       "string.empty": 'The "image" field must be filled in',

@@ -16,14 +16,18 @@ if (!MONGO_URL) {
   throw new Error("MONGO_URL is not defined in .env");
 }
 
-mongoose.connect(MONGO_URL);
+console.log("MONGO_URL:", MONGO_URL);
+
+mongoose
+  .connect(MONGO_URL)
+  .then(() => console.log("✅ Connected to MongoDB"))
+  .catch((err) => console.error("❌ Failed to connect to MongoDB:", err));
 
 const mainRouter = require("./routes/index");
 const errorHandler = require("./middlewares/error-handler");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 app.use(cors());
 
 app.use(requestLogger);
