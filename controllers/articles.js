@@ -38,6 +38,7 @@ const deleteArticles = (req, res, next) => {
   const { articleId } = req.params;
   const userId = req.user._id;
   Article.findById(articleId)
+    .select("+owner")
     .then((article) => {
       if (!article) {
         throw new NotFoundError("Article not found");
