@@ -13,12 +13,12 @@ const getArticles = (req, res, next) => {
 };
 
 const saveArticles = (req, res, next) => {
-  const { keyword, title, text, date, source, url, image } = req.body;
+  const { keyword, title, description, date, source, url, image } = req.body;
   const ownerId = req.user._id;
   Article.create({
     keyword,
     title,
-    text,
+    description,
     date,
     source,
     url,
