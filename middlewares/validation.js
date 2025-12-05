@@ -7,7 +7,7 @@ module.exports.validateLogin = celebrate({
       "string.email": 'The "email" field must be a valid email',
     }),
     password: Joi.string().required().messages({
-      "string.empty": 'The "email" field must be filled in',
+      "string.empty": 'The "password" field must be filled in',
     }),
   }),
 });
@@ -23,7 +23,7 @@ module.exports.validateUserCreation = celebrate({
       "string.email": 'The "email" field must be a valid email',
     }),
     password: Joi.string().required().messages({
-      "string.empty": 'The "email" field must be filled in',
+      "string.empty": 'The "password" field must be filled in',
     }),
   }),
 });
