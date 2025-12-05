@@ -28,23 +28,29 @@ const getCurrentUser = (req, res, next) => {
 };
 
 const createUser = (req, res, next) => {
-  const { email } = req.body;
+  const { email, password, name } = req.body;
+  if (!password) {
+    console.log("Password is undefined!");
+  }
   bcrypt
     .hash(password, 10)
     .then((hash) =>
       User.create({
         email,
         password: hash,
+        name,
       }),
     )
     .then((user) => {
-      const { _id, email: userEmail } = user;
+      const { _id, email: userEmail, name: userName } = user;
       res.status(ERROR_STATUS.CREATED).send({
         _id,
         email: userEmail,
+        name: userName,
       });
     })
     .catch((err) => {
+      console.error("Error in createUser:", err);
       if (err.name === "ValidationError") {
         return next(new BadRequestError("Invalid user information"));
       }

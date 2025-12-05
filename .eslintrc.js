@@ -1,5 +1,4 @@
-//Code quality checker that catches errors and enforces coding standards
-
+// Code quality checker that catches errors and enforces coding standards
 module.exports = {
   env: {
     es2021: true,

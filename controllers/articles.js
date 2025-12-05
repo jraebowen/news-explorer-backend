@@ -7,15 +7,24 @@ const ForbiddenError = require("../errors/forbidden-error");
 
 const getArticles = (req, res, next) => {
   const ownerId = req.user._id;
-  Article.find({ onwer: ownerId })
-    .then((articles) => res.status(ERROR_STATUS.OK).sent(articles))
+  Article.find({ owner: ownerId })
+    .then((articles) => res.status(ERROR_STATUS.OK).send(articles))
     .catch(next);
 };
 
 const saveArticles = (req, res, next) => {
-  const { keyword, title, text, date, source, link, image } = req.body;
+  const { keyword, title, description, date, source, url, image } = req.body;
   const ownerId = req.user._id;
-  Article.create({ keyword, title, text, date, source, link, image, ownerId })
+  Article.create({
+    keyword,
+    title,
+    description,
+    date,
+    source,
+    url,
+    image,
+    owner: ownerId,
+  })
     .then((article) => res.status(ERROR_STATUS.CREATED).json(article))
     .catch((err) => {
       if (err.name === "ValidationError") {
@@ -29,6 +38,7 @@ const deleteArticles = (req, res, next) => {
   const { articleId } = req.params;
   const userId = req.user._id;
   Article.findById(articleId)
+    .select("+owner")
     .then((article) => {
       if (!article) {
         throw new NotFoundError("Article not found");

@@ -10,7 +10,7 @@ const articleSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  text: {
+  description: {
     type: String,
     required: true,
   },
@@ -22,7 +22,7 @@ const articleSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  link: {
+  url: {
     type: String,
     required: true,
     validate: {
