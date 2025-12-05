@@ -29,6 +29,9 @@ const getCurrentUser = (req, res, next) => {
 
 const createUser = (req, res, next) => {
   const { email, password, name } = req.body;
+  if (!password) {
+    console.log("Password is undefined!");
+  }
   bcrypt
     .hash(password, 10)
     .then((hash) =>
@@ -47,6 +50,7 @@ const createUser = (req, res, next) => {
       });
     })
     .catch((err) => {
+      console.error("Error in createUser:", err);
       if (err.name === "ValidationError") {
         return next(new BadRequestError("Invalid user information"));
       }
