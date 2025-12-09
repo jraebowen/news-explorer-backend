@@ -1,4 +1,4 @@
-import ERROR_STATUS from "../utils/errors";
+const ERROR_STATUS = require("../utils/errors");
 
 const errorHandler = (err, req, res, next) => {
   console.error(err);
