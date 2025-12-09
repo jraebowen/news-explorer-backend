@@ -26,28 +26,42 @@ npm start
 
 ---
 
-## Technologies and Techniques
+## Features
+
+# Authentication & Authorization
+
+- Secure password hashing using bcryptjs
+- JWT-based authentication
+- Tokens stored client-side and included in requests via Authorization header
+- Protected routes that require a valid JWT
+
+# Article Management
+
+- Users can save and delete news articles
+- Each saved article is associated with the currently authenticated user
+- Strict validation ensures safe data handling
+
+# Routing & Validation
+
+- Modular Express routing structure
+- All request bodies, params, and URLs validated with celebrate / Joi
+- Centralized error-handling middleware
+- CORS configured to allow requests from the deployed frontend
+
+# Database (MongoDB + Mongoose)
+
+- Mongoose models for Users and Articles
+- Schema-level validation and built-in constraints
+
+## Tech Stack
 
 - Node.js
-  - Configured the server environment and managed startup on a dedicated port
-  - Handled HTTP requests and responses using Node core modules
 - Express.js
-  - Implemented routing for different endpoints
-  - Used middleware for request parsing, error handling, and logging
-  - Created modular route handlers for cleaner architecture
-- Mongoose + MongoDB
-  - Designed schemas and models to define data structure
-  - Connected Node.js to MongoDB using Mongoose for seamless data operations
-  - Leveraged built-in validation and schema methods for data integrity
-- Authentication & Authorization
-  - Implemented secure password hashing using **bcryptjs**
-  - Used **jsonwebtoken (JWT)** for authentication and token-based session handling
-  - Created protected routes that require valid tokens for access
-  - Stored user information securely in the token payload to verify identity across requests
-- Error Handling
-  - Implemented centralized error-handling middleware to standardize server responses
-  - Used custom error classes to return meaningful HTTP status codes (e.g., 400 for bad requests, 404 for not found, 500 for server errors)
-  - Ensured error messages were user-friendly for the client while keeping detailed logs for developers
+- MongoDB + Mongoose
+- JWT Authentication
+- Celebrate / Joi (validation)
+- Nodemon for local dev
+- Google Cloud VM for deployment (Ubuntu 24.04)
 
 **Project Structure**
 
@@ -59,4 +73,4 @@ news-explorer-backend/
 ├─ utils/ # Helper functions
 ├─ .env # Environment variables
 ├─ package.json # Dependencies and scripts
-└─ index.js # Server entry point
+└─ app.js # Server entry point
