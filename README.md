@@ -16,15 +16,15 @@ This is the backend server for the **News Explorer** web application. It handles
 
 From the backend project directory:
 
-# Install dependencies
+### Install dependencies
 
 npm install
 
-# Run server in development mode
+### Run server in development mode
 
 npm run dev
 
-# Start production server
+### Start production server
 
 npm start
 
@@ -35,26 +35,26 @@ MONGO_URL=mongodb://localhost:27017/newsdb
 
 ## Deployment Notes (Google Cloud VM)
 
-# Stop the server
+### Stop the server
 
 pm2 stop all
 
-# Update the Code
+### Update the Code
 
-# From your local machine:
+## From your local machine:
 
 scp -r ./news-explorer-backend jraebowen@YOUR_SERVER_IP:/home/youruser/
 
-# Reinstall Dependencies on the server, in your project folder
+### Reinstall Dependencies on the server, in your project folder
 
 npm install
 
-# Restart the Server
+### Restart the Server
 
 pm2 start index.js
 pm2 status
 
-# Check Logs
+### Check Logs
 
 pm2 logs
 
@@ -62,39 +62,39 @@ pm2 logs
 
 ## Features
 
-# Authentication & Authorization
+### Authentication & Authorization
 
 - Secure password hashing using bcryptjs
 - JWT-based authentication
 - Tokens stored client-side and included in requests via Authorization header
 - Protected routes that require a valid JWT
 
-# Article Management
+### Article Management
 
 - Users can save and delete news articles
 - Each saved article is associated with the currently authenticated user
 - Strict validation ensures safe data handling
 
-# Routing & Validation
+### Routing & Validation
 
 - Modular Express routing structure
 - All request bodies, params, and URLs validated with celebrate / Joi
 - Centralized error-handling middleware
 - CORS configured to allow requests from the deployed frontend
 
-# Database (MongoDB + Mongoose)
+### Database (MongoDB + Mongoose)
 
 - Mongoose models for Users and Articles
 - Schema-level validation and built-in constraints
 
-# Validation & Error Handling
+### Validation & Error Handling
 
 - All incoming data is validated using celebrate
 - Invalid requests return structured JSON error responses
 - Custom error classes used throughout the app
 - Centralized error middleware prevents exposing internal details
 
-# Frontend Integration Notes
+### Frontend Integration Notes
 
 - The deployed frontend calls the backend using absolute API URLs
 - Authentication is fully synced using JWT stored in localStorage
