@@ -8,55 +8,7 @@ This is the backend server for the **News Explorer** web application. It handles
 
 - **Backend domain:** [https://newsexplorer.wildsurf.net/](https://newsexplorer.wildsurf.net/)
 - **Frontend repository:** [GitHub Frontend](https://github.com/jraebowen/news-explorer-frontend)
-- **Recorded project overview:** TO BE UPDATED
-
----
-
-## Running the Project Locally
-
-From the backend project directory:
-
-### Install dependencies
-
-npm install
-
-### Run server in development mode
-
-npm run dev
-
-### Start production server
-
-npm start
-
-Ensure the .env file includes:
-PORT=3000
-JWT_SECRET=your_secret
-MONGO_URL=mongodb://localhost:27017/newsdb
-
-## Deployment Notes (Google Cloud VM)
-
-### Stop the server
-
-pm2 stop all
-
-### Update the Code
-
-## From your local machine:
-
-scp -r ./news-explorer-backend jraebowen@YOUR_SERVER_IP:/home/youruser/
-
-### Reinstall Dependencies on the server, in your project folder
-
-npm install
-
-### Restart the Server
-
-pm2 start index.js
-pm2 status
-
-### Check Logs
-
-pm2 logs
+- **Recorded project overview:** https://www.loom.com/share/521bbbc9e1c34b69bafaf5b92e37ab0d
 
 ---
 
@@ -117,7 +69,8 @@ pm2 logs
 
 **Project Structure**
 
-```news-explorer-backend/
+```
+news-explorer-backend/
 ├── controllers/ # Business logic for user + article routes
 ├── models/ # Mongoose schemas (User, Article)
 ├── routes/ # API route definitions
@@ -128,3 +81,52 @@ pm2 logs
 ├── app.js # Express configuration
 └── index.js # Server entry point
 ```
+
+---
+
+## Running the Project Locally
+
+From the backend project directory:
+
+### Install dependencies
+
+npm install
+
+### Run server in development mode
+
+npm run dev
+
+### Start production server
+
+npm start
+
+## Ensure the .env file includes:
+
+PORT=3000
+JWT_SECRET=your_secret
+MONGO_URL=mongodb://localhost:27017/newsdb
+
+## Deployment Notes (Google Cloud VM)
+
+### Stop the server
+
+pm2 stop all
+
+### Update the Code
+
+## From your local machine:
+
+scp -r ./news-explorer-backend jraebowen@YOUR_SERVER_IP:/home/youruser/
+
+### Reinstall Dependencies on the server, in your project folder
+
+npm install
+
+### Restart the Server
+
+pm2 start index.js
+pm2 status
+
+### Check Logs
+
+pm2 logs
