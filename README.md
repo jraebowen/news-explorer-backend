@@ -117,7 +117,7 @@ pm2 logs
 
 **Project Structure**
 
-news-explorer-backend/
+```news-explorer-backend/
 ├── controllers/ # Business logic for user + article routes
 ├── models/ # Mongoose schemas (User, Article)
 ├── routes/ # API route definitions
@@ -127,3 +127,4 @@ news-explorer-backend/
 ├── .env # Environment variables
 ├── app.js # Express configuration
 └── index.js # Server entry point
+```
