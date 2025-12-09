@@ -4,7 +4,7 @@ This is the backend server for the **News Explorer** web application. It handles
 
 ---
 
-## 🌐 Live Application
+## Live Application
 
 - **Backend domain:** [https://newsexplorer.wildsurf.net/](https://newsexplorer.wildsurf.net/)
 - **Frontend repository:** [GitHub Frontend](https://github.com/jraebowen/news-explorer-frontend)
@@ -12,7 +12,7 @@ This is the backend server for the **News Explorer** web application. It handles
 
 ---
 
-## ⚡ Running the Project
+## Running the Project Locally
 
 From the backend project directory:
 
@@ -20,9 +20,43 @@ From the backend project directory:
 
 npm install
 
-# Start the server
+# Run server in development mode
+
+npm run dev
+
+# Start production server
 
 npm start
+
+Ensure the .env file includes:
+PORT=3000
+JWT_SECRET=your_secret
+MONGO_URL=mongodb://localhost:27017/newsdb
+
+## Deployment Notes (Google Cloud VM)
+
+# Stop the server
+
+pm2 stop all
+
+# Update the Code
+
+# From your local machine:
+
+scp -r ./news-explorer-backend jraebowen@YOUR_SERVER_IP:/home/youruser/
+
+# Reinstall Dependencies on the server, in your project folder
+
+npm install
+
+# Restart the Server
+
+pm2 start index.js
+pm2 status
+
+# Check Logs
+
+pm2 logs
 
 ---
 
@@ -53,6 +87,24 @@ npm start
 - Mongoose models for Users and Articles
 - Schema-level validation and built-in constraints
 
+# Validation & Error Handling
+
+- All incoming data is validated using celebrate
+- Invalid requests return structured JSON error responses
+- Custom error classes used throughout the app
+- Centralized error middleware prevents exposing internal details
+
+# Frontend Integration Notes
+
+- The deployed frontend calls the backend using absolute API URLs
+- Authentication is fully synced using JWT stored in localStorage
+- Protected routes in the frontend redirect to the homepage and then open the login modal
+- CORS is configured to allow:
+  - https://newsexplorer.wildsurf.net
+  - your local dev environment
+
+---
+
 ## Tech Stack
 
 - Node.js
@@ -66,11 +118,12 @@ npm start
 **Project Structure**
 
 news-explorer-backend/
-├─ controllers/ # Route logic
-├─ models/ # Mongoose schemas and models
-├─ routes/ # Express route definitions
-├─ middlewares/ # Authentication & error handling middleware
-├─ utils/ # Helper functions
-├─ .env # Environment variables
-├─ package.json # Dependencies and scripts
-└─ app.js # Server entry point
+├── controllers/ # Business logic for user + article routes
+├── models/ # Mongoose schemas (User, Article)
+├── routes/ # API route definitions
+├── middlewares/ # Auth, validation, error-handling middleware
+├── utils/ # Helper functions (CORS, constants, regex)
+├── errors/ # Request/error logs (if enabled)
+├── .env # Environment variables
+├── app.js # Express configuration
+└── index.js # Server entry point
