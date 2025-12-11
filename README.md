@@ -102,7 +102,7 @@ npm start
 
 ## Ensure the .env file includes:
 
-PORT=3000
+PORT=3002
 JWT_SECRET=your_secret
 MONGO_URL=mongodb://localhost:27017/newsdb
 
